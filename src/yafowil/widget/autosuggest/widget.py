@@ -1,11 +1,10 @@
 from yafowil.base import factory
-from yafowil.common import generic_extractor, input_generic_renderer
+from yafowil.common import generic_extractor, input_attributes_common
 from yafowil.utils import managedprops
 
 
 @managedprops('source', 'delay', 'minLength')
 def autosuggest_renderer(widget, data):
-    result = data.rendered
     tag = data.tag
     source = widget.attrs['source']
     if callable(source):
@@ -18,14 +17,14 @@ def autosuggest_renderer(widget, data):
     else:
         raise ValueError, 'resulting source must be tuple/list or string'
 
-    result += tag('div', source,
-                  **{'data-source-type': source_type,
-                     'data-source': source,
-                     'data-delay': widget.attrs['delay'],
-                     'data-minLength': widget.attrs['minLength'],
-                    })
-
-    return tag
+    attrs = input_attributes_common(widget, data)
+    attrs.update({'data-source-type': source_type,
+                  'data-source': source,
+                  'data-delay': widget.attrs['delay'],
+                  'data-minLength': widget.attrs['minLength']
+                 })
+    attrs['type'] = 'text'
+    return tag('input', **attrs)
 
 
 def autosuggest_extractor(widget, data):
@@ -35,7 +34,7 @@ def autosuggest_extractor(widget, data):
 factory.register(
     'autosuggest',
     extractors=[generic_extractor, autosuggest_extractor],
-    edit_renderers=[input_generic_renderer, autosuggest_renderer])
+    edit_renderers=[autosuggest_renderer])
 
 factory.doc['blueprint']['autosuggest'] = \
 """Add-on blueprint `yafowil.widget.autosuggest
@@ -51,6 +50,8 @@ factory.defaults['autosuggest.delay'] = '300' #ms
 factory.defaults['autosuggest.minLength'] = '1' #characters
 factory.defaults['autosuggest.disabled'] = False
 factory.defaults['autosuggest.size'] = None
+factory.defaults['autosuggest.source'] = None
+factory.defaults['autosuggest.autocomplete'] = 'autocomplete'
 
 factory.register_plan('autosuggestfield',
                       ['field', 'label', 'error', 'autosuggest'], {})
