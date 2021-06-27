@@ -38,7 +38,7 @@ factory.register(
 
 factory.doc['blueprint']['autosuggest'] = \
 """Add-on blueprint `yafowil.widget.autosuggest
-<http://github.com/bluedynamics/yafowil.widget.autosuggest/>`_ utilizing
+<http://github.com/conestack/yafowil.widget.autosuggest/>`_ utilizing
 `jquery autosuggest <https://github.com/wuyuntao/jquery-autosuggest/>`_ to
 offer the user a selection based on the input given so far.
 """

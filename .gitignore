@@ -13,4 +13,4 @@ eggs
 parts
 src/packages
 var
-src/yafowil.widget.multiselect.egg-info/
+src/yafowil.widget.autosuggest.egg-info/
