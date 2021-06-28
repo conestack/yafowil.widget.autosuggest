@@ -5,6 +5,8 @@ It is based on the
 `jquery-autosuggest <https://github.com/wuyuntao/jquery-autosuggest/>`_ plugin.
 Also see `here <http://code.drewwilson.com/entry/autosuggest-jquery-plugin>`_
 
+**THIS PACKAGE IS ARCHIVED**
+
 
 Source Code
 ===========
